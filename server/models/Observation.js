@@ -9,19 +9,33 @@ const ObservationSchema = new mongoose.Schema({
   grade: String,
 
   // Input Data
-  responses: { type: Object, required: true }, // Stores { q1: 1, q2: 3... }
+  responses: { type: Object, required: true },
   
-  // Logic Engine Output
-  riskLevel: { 
-    type: String, 
-    enum: ['Low', 'Medium', 'High'],
-    required: true 
+  // --- NEW: COMPLEX ANALYSIS FIELDS ---
+  riskLevel: { type: String, enum: ['Low', 'Medium', 'High', 'Critical'], required: true },
+  
+  // Breakdown of scores (e.g., Focus: 12/15, Social: 4/15)
+  categoryScores: {
+    focus: Number,
+    social: Number,
+    academic: Number,
+    emotional: Number
   },
-  summary: String,
+  
+  // The "Verbose" Paragraph
+  detailedAnalysis: String, 
+  
   strategies: [String],
   resources: [String],
 
-  // Timestamp
+  // --- NEW: NGO ACTIONS ---
+  ngoStatus: { type: String, default: 'Pending' }, // Pending, In Progress, Resolved
+  ngoActions: [{
+    actionType: String, // "Funds", "Tutor", "Manual"
+    timestamp: Date,
+    note: String
+  }],
+
   createdAt: { type: Date, default: Date.now }
 });
 

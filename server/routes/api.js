@@ -6,25 +6,36 @@ const Observation = require('../models/Observation');
 const calculateRisk = (responses) => {
   const score = Object.values(responses).reduce((a, b) => a + b, 0);
   
+  // Logic updated for 20 Questions (Max Score 60)
+  // Low: 20-35 | Medium: 36-48 | High: 49+
+  
   let result = {
     riskLevel: 'Low',
-    summary: "Student is generally on track.",
-    strategies: ["Positive Reinforcement", "Peer Buddy"],
-    resources: ["Video: Focus Games"]
+    summary: "Student is performing within the typical range. Continue monitoring.",
+    strategies: ["Positive Reinforcement", "Peer Buddy System"],
+    resources: ["Video: Inclusive Classroom Games"]
   };
 
-  if (score > 4) {
+  if (score > 35) {
     result.riskLevel = 'Medium';
-    result.summary = "Consistent struggle observed.";
-    result.strategies = ["Visual Timers", "Chunking Instructions", "Seating Change"];
-    result.resources = ["Video: Managing Distractions", "Tool: Schedule Maker"];
+    result.summary = "Student shows emerging difficulties in specific areas (Focus/Social).";
+    result.strategies = [
+      "Visual Timers for Tasks", 
+      "Seating near the teacher", 
+      "Break tasks into smaller steps (Chunking)"
+    ];
+    result.resources = ["PDF: Classroom Accommodations Checklist", "Tool: Visual Schedule Maker"];
   }
 
-  if (score > 7) {
+  if (score > 48) {
     result.riskLevel = 'High';
-    result.summary = "Immediate support recommended.";
-    result.strategies = ["Parent Conference", "Counselor Referral", "IEP Meeting"];
-    result.resources = ["Guide: Crisis Intervention", "Contact: Child Psychologist"];
+    result.summary = "Significant challenges detected across multiple domains. Targeted support recommended.";
+    result.strategies = [
+      "Initiate Individualized Education Plan (IEP)", 
+      "Schedule Parent Conference (Support-focused)", 
+      "Referral to School Counselor/Specialist"
+    ];
+    result.resources = ["Guide: Crisis Intervention Protocols", "Contact: Local Child Development NGO"];
   }
 
   return result;
