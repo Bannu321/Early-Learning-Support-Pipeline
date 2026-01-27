@@ -1,0 +1,153 @@
+/* src/App.css */
+
+:root {
+  /* The "Nano" Palette */
+  --primary: #5D5FEF;       /* Soft Indigo */
+  --primary-hover: #4b4dcf;
+  --bg-color: #EDF2F4;      /* Sage Green / Off-White Background */
+  --surface: #FFFFFF;       /* Pure White Cards */
+  --text-main: #2B2D42;     /* Dark Grey Text */
+  --text-muted: #8D99AE;    /* Softer Text */
+  
+  /* Status Colors */
+  --risk-low: #27AE60;      /* Calm Green */
+  --risk-med: #F2994A;      /* Warning Orange */
+  --risk-high: #EB5757;     /* Urgent Red */
+
+  /* UI Variables */
+  --radius: 16px;           /* Softer, rounder corners */
+  --shadow: 0 10px 40px rgba(93, 95, 239, 0.08); /* Soft Indigo Glow */
+  --max-width: 1100px;      /* Controls how wide the content gets */
+}
+
+/* RESET & CORE LAYOUT */
+* {
+  box-sizing: border-box; /* Crucial for layout math */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+  
+  /* FORCE FULL WIDTH */
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+#root {
+  /* This ensures the React App takes full width */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers the direct children */
+}
+
+/* THE MAIN WRAPPER */
+.main-wrapper {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto; /* The Magic Fix: Auto margins center horizontally */
+  padding: 20px;
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  margin-bottom: 60px;
+  width: 100%;
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-links span {
+  margin-left: 30px;
+  color: var(--text-muted);
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.nav-links span:hover {
+  color: var(--primary);
+}
+
+/* BUTTONS */
+.btn {
+  padding: 14px 28px;
+  border-radius: 50px; /* Pill shape like modern apps */
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+  box-shadow: 0 4px 15px rgba(93, 95, 239, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(93, 95, 239, 0.5);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-muted);
+  border: 2px solid #E5E5E5;
+}
+
+.btn-secondary:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* CARD UI (Used for Forms & Results) */
+.glass-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 40px;
+  width: 100%;
+  max-width: 700px; /* Limits card width for readability */
+  margin: 0 auto;   /* Centers the card itself */
+  text-align: left; /* Keep text readable inside */
+}
+
+
+.input-field {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  margin-top: 5px;
+}
+.input-field:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(93, 95, 239, 0.1);
+}
+
+/* UTILITIES */
+.center-text { text-align: center; }
+.mb-20 { margin-bottom: 20px; }
+.mb-40 { margin-bottom: 40px; }
