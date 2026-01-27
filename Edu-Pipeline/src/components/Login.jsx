@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_BASE } from '../data/api';
 
 const Login = ({ onLoginSuccess, onSwitchToRegister }) => {
   const [role, setRole] = useState('teacher'); // 'teacher' or 'ngo'
@@ -7,8 +8,8 @@ const Login = ({ onLoginSuccess, onSwitchToRegister }) => {
   const handleLogin = async () => {
     // Select the correct endpoint based on role
     const endpoint = role === 'teacher' 
-      ? 'http://localhost:5000/api/auth/login' 
-      : 'http://localhost:5000/api/auth/ngo/login';
+      ? `${API_BASE}/auth/login` 
+      : `${API_BASE}/auth/ngo/login`;
 
     const res = await fetch(endpoint, {
       method: 'POST',
