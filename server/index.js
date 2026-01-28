@@ -4,36 +4,27 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const app = express();
-// Railway provides the PORT automatically
-const PORT = process.env.PORT || 5000; 
+const PORT = 5000; // Local Port
 
-// --- CORS CONFIGURATION ---
-// This allows ANY frontend to talk to your backend. 
-// For higher security later, replace '*' with your specific Vercel URL.
+// Standard Local CORS
 app.use(cors({
-  origin: '*', 
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  origin: 'http://localhost:5173', // Only allow your Vite Frontend
   credentials: true
 }));
 
 app.use(express.json());
 
-// DB Connection (Railway provides MONGO_URL)
-const MONGO_URI = process.env.MONGO_URL || process.env.MONGO_URI || 'mongodb://localhost:27017/els-pipeline';
+// Force Local MongoDB
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/els-pipeline';
 
 mongoose.connect(MONGO_URI)
-  .then(() => console.log("✅ MongoDB Connected"))
+  .then(() => console.log("✅ Local MongoDB Connected"))
   .catch(err => console.error("❌ DB Connection Error:", err));
 
-// Routes
 const apiRoutes = require('./routes/api');
 const authRoutes = require('./routes/auth');
 
 app.use('/api', apiRoutes);
 app.use('/api/auth', authRoutes);
 
-app.get('/', (req, res) => {
-  res.send("Early Learning Pipeline API is Running 🚀");
-});
-
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Local Server running on port ${PORT}`));

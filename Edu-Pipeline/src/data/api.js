@@ -1,7 +1,5 @@
-// AUTOMATIC URL SWITCHING
-// If we are in production (Vercel), use the Environment Variable.
-// If we are local, use localhost.
-export const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+// REVERTED TO LOCALHOST
+export const API_BASE = 'http://localhost:5000/api';
 
 // 1. Submit Observation (POST)
 export const analyzeObservation = async (formData) => {
@@ -16,7 +14,7 @@ export const analyzeObservation = async (formData) => {
     return await response.json();
   } catch (error) {
     console.error("API Error:", error);
-    alert("Could not connect to server.");
+    alert("Could not connect to server. Is it running?");
     return null;
   }
 };
